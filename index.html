@@ -1,35 +1,223 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Indonesia</title>
-    <!-- Test dari VS Code -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Indonesia | Solusi Data Kelas Perusahaan</title>
+  <meta name="description" content="Data Indonesia menyediakan solusi pengelolaan data, analitik, dan dashboard eksekutif kelas perusahaan untuk transformasi digital di Indonesia." />
+  <meta name="keywords" content="data indonesia, big data, analitik, dashboard, integrasi data, transformasi digital" />
+  <meta name="author" content="Data Indonesia" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://dataindonesia.id/" />
 
-    <link rel="stylesheet" href="style.css">
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="id_ID" />
+  <meta property="og:title" content="Data Indonesia | Solusi Data Kelas Perusahaan" />
+  <meta property="og:description" content="Mitra strategis pengelolaan data dan analitik untuk organisasi modern di Indonesia." />
+  <meta property="og:image" content="assets/images/logotransparant.png" />
+  <meta property="og:url" content="https://data-indonesia.data-indonesia21.workers.dev/" />
+
+  <meta name="theme-color" content="#070707" />
+  <link rel="icon" type="image/png" href="assets/images/logotransparant.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Sora:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Sora:wght@400;500;600&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Sora:wght@400;500;600&display=swap" /></noscript>
+
+  <link rel="stylesheet" href="assets/css/gaya.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Data Indonesia",
+    "url": "https://dataindonesia.id/",
+    "logo": "https://dataindonesia.id/assets/images/logotransparant.png",
+    "description": "Solusi data, analitik, dan transformasi digital kelas perusahaan.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Jakarta",
+      "addressCountry": "ID"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+62-21-1234-5678",
+      "contactType": "customer service",
+      "areaServed": "ID",
+      "availableLanguage": "Indonesian"
+    }
+  }
+  </script>
 </head>
-
 <body>
+  <!-- Pemuat -->
+  <div class="pemuat" id="pemuat" role="status" aria-live="polite" aria-label="Memuat halaman">
+    <div>
+      <img class="pemuat__logo" src="assets/images/logotransparant.png" alt="" width="120" height="120" decoding="async" />
+      <div class="pemuat__garis" aria-hidden="true"></div>
+    </div>
+  </div>
 
-    <header>
-        <h1>DATA INDONESIA</h1>
-        <p>Solusi Data Terpercaya</p>
-    </header>
+  <div id="wadah-navigasi"></div>
 
-    <main>
+  <main id="konten-utama">
+    <!-- Hero fullscreen -->
+    <section class="pahlawan" aria-label="Bagian utama">
+      <div class="pahlawan__latar" aria-hidden="true"></div>
+      <div class="pahlawan__kisi" aria-hidden="true"></div>
+      <div class="pahlawan__cahaya" aria-hidden="true"></div>
 
-        <section class="hero">
-            <h2>Selamat Datang</h2>
-            <p>
-                Website resmi Data Indonesia.
-            </p>
+      <div class="wadah pahlawan__isi">
+        <div class="pahlawan__merek">
+          <img
+            class="pahlawan__logo"
+            src="assets/images/logotransparant.png"
+            alt="Logo Data Indonesia"
+            width="180"
+            height="180"
+            fetchpriority="high"
+            decoding="async"
+          />
+          <h1 class="pahlawan__judul-merek">Data Indonesia</h1>
+        </div>
 
-            <button>Pelajari Lebih Lanjut</button>
-        </section>
+        <p class="pahlawan__headline">
+          Infrastruktur data yang andal untuk keputusan bisnis yang lebih tajam.
+        </p>
+        <p class="pahlawan__dukungan">
+          Kami membantu organisasi mengelola, mengamankan, dan memanfaatkan data dalam skala nasional.
+        </p>
 
-    </main>
+        <div class="pahlawan__aksi">
+          <a class="tombol tombol--utama" href="layanan.html">
+            Jelajahi Layanan
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="tombol tombol--garis" href="dashboard.html">Lihat Dashboard</a>
+        </div>
+      </div>
 
-<script src="script.js"></script>
+      <div class="pahlawan__gulir" aria-hidden="true">
+        <span>Gulir</span>
+        <div class="pahlawan__gulir-ikon"></div>
+      </div>
+    </section>
 
+    <!-- Statistik -->
+    <section class="bagian bagian--gelap" aria-labelledby="judul-statistik">
+      <div class="wadah">
+        <div class="bagian__kepala bagian__kepala--tengah ungkap">
+          <span class="bagian__label">Dampak Kami</span>
+          <h2 class="bagian__judul" id="judul-statistik">Angka yang berbicara</h2>
+          <p class="bagian__deskripsi">Kepercayaan institusi di seluruh Indonesia terhadap solusi data kami.</p>
+        </div>
+
+        <div class="statistik" role="list">
+          <div class="statistik__item ungkap ungkap-tunda-1" role="listitem">
+            <div class="statistik__angka" data-penghitung="150" data-akhiran="+">0</div>
+            <p class="statistik__label">Klien Institusi</p>
+          </div>
+          <div class="statistik__item ungkap ungkap-tunda-2" role="listitem">
+            <div class="statistik__angka" data-penghitung="98" data-akhiran="%">0</div>
+            <p class="statistik__label">Tingkat Kepuasan</p>
+          </div>
+          <div class="statistik__item ungkap ungkap-tunda-3" role="listitem">
+            <div class="statistik__angka" data-penghitung="25" data-akhiran="+">0</div>
+            <p class="statistik__label">Provinsi Terjangkau</p>
+          </div>
+          <div class="statistik__item ungkap" role="listitem">
+            <div class="statistik__angka" data-penghitung="12" data-akhiran="">0</div>
+            <p class="statistik__label">Tahun Pengalaman</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Layanan -->
+    <section class="bagian bagian--emas-halus" aria-labelledby="judul-layanan">
+      <div class="wadah">
+        <div class="bagian__kepala ungkap">
+          <span class="bagian__label">Layanan</span>
+          <h2 class="bagian__judul" id="judul-layanan">Solusi data end-to-end</h2>
+          <p class="bagian__deskripsi">Dari integrasi hingga insight eksekutif — dirancang untuk skala perusahaan.</p>
+        </div>
+
+        <div class="kisi-layanan">
+          <article class="layanan-item ungkap ungkap-tunda-1">
+            <div class="layanan-item__ikon" aria-hidden="true">
+              <img src="assets/icons/basis-data.svg" alt="" width="42" height="42" loading="lazy" />
+            </div>
+            <h3 class="layanan-item__judul">Integrasi Data</h3>
+            <p class="layanan-item__teks">Menyatukan sumber data tersebar menjadi fondasi tunggal yang bersih dan terpercaya.</p>
+          </article>
+
+          <article class="layanan-item ungkap ungkap-tunda-2">
+            <div class="layanan-item__ikon" aria-hidden="true">
+              <img src="assets/icons/analitik.svg" alt="" width="42" height="42" loading="lazy" />
+            </div>
+            <h3 class="layanan-item__judul">Analitik Bisnis</h3>
+            <p class="layanan-item__teks">Model analitik yang mengubah data mentah menjadi keputusan strategis yang terukur.</p>
+          </article>
+
+          <article class="layanan-item ungkap ungkap-tunda-3">
+            <div class="layanan-item__ikon" aria-hidden="true">
+              <img src="assets/icons/keamanan.svg" alt="" width="42" height="42" loading="lazy" />
+            </div>
+            <h3 class="layanan-item__judul">Keamanan &amp; Tata Kelola</h3>
+            <p class="layanan-item__teks">Kontrol akses, audit, dan kepatuhan untuk melindungi aset data organisasi Anda.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tentang ringkas -->
+    <section class="bagian" aria-labelledby="judul-tentang">
+      <div class="wadah tentang-ringkas">
+        <div class="tentang-ringkas__visual ungkap" aria-hidden="true">
+          <img class="tentang-ringkas__logo" src="assets/images/logotransparant.png" alt="" width="220" height="220" loading="lazy" decoding="async" />
+        </div>
+
+        <div class="ungkap ungkap-tunda-1">
+          <span class="bagian__label">Tentang Kami</span>
+          <h2 class="bagian__judul" id="judul-tentang">Identitas hitam &amp; emas, standar kelas perusahaan</h2>
+          <p class="bagian__deskripsi">
+            Data Indonesia lahir dari komitmen membangun ekosistem data nasional yang tangguh, transparan, dan siap menghadapi era digital.
+          </p>
+          <ul class="tentang-ringkas__poin">
+            <li>
+              <img src="assets/icons/centang.svg" alt="" width="18" height="18" loading="lazy" />
+              Arsitektur data yang skalabel dan modular
+            </li>
+            <li>
+              <img src="assets/icons/centang.svg" alt="" width="18" height="18" loading="lazy" />
+              Tim ahli dengan pengalaman lintas sektor
+            </li>
+            <li>
+              <img src="assets/icons/centang.svg" alt="" width="18" height="18" loading="lazy" />
+              Fokus pada performa, keamanan, dan kejelasan insight
+            </li>
+          </ul>
+          <p style="margin-top: 1.75rem">
+            <a class="tombol tombol--garis" href="tentang.html">Selengkapnya</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ajakan -->
+    <section class="ajakan" aria-labelledby="judul-ajakan">
+      <div class="wadah ungkap">
+        <h2 class="ajakan__judul" id="judul-ajakan">Siap mengangkat nilai data Anda?</h2>
+        <p class="ajakan__teks">Mari diskusikan kebutuhan organisasi Anda bersama tim Data Indonesia.</p>
+        <a class="tombol tombol--utama" href="kontak.html">Mulai Konsultasi</a>
+      </div>
+    </section>
+  </main>
+
+  <div id="wadah-kaki"></div>
+
+  <script src="assets/js/utama.js" defer></script>
 </body>
 </html>

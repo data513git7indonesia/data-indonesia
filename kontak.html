@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontak | Data Indonesia</title>
+  <meta name="description" content="Hubungi Data Indonesia. Kirim pesan melalui formulir — data otomatis tersimpan ke Google Sheets." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://dataindonesia.id/kontak.html" />
+  <meta property="og:title" content="Kontak | Data Indonesia" />
+  <meta property="og:description" content="Konsultasikan kebutuhan data organisasi Anda." />
+  <meta property="og:image" content="assets/images/logotransparant.png" />
+  <meta name="theme-color" content="#070707" />
+  <link rel="icon" type="image/png" href="assets/images/logotransparant.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Sora:wght@400;500;600&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Sora:wght@400;500;600&display=swap" /></noscript>
+  <link rel="stylesheet" href="assets/css/gaya.css" />
+</head>
+<body>
+  <div class="pemuat" id="pemuat" role="status" aria-live="polite" aria-label="Memuat halaman">
+    <div>
+      <img class="pemuat__logo" src="assets/images/logotransparant.png" alt="" width="120" height="120" decoding="async" />
+      <div class="pemuat__garis" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div id="wadah-navigasi"></div>
+
+  <main id="konten-utama">
+    <header class="halaman-hero">
+      <div class="wadah ungkap">
+        <span class="bagian__label">Hubungi Kami</span>
+        <h1 class="halaman-hero__judul">Kontak</h1>
+        <p class="halaman-hero__teks">
+          Sampaikan kebutuhan Anda. Setiap pesan dari formulir ini dapat otomatis masuk ke Google Sheets tim kami.
+        </p>
+      </div>
+    </header>
+
+    <section class="bagian" aria-labelledby="judul-kontak">
+      <div class="wadah kontak-kisi">
+        <aside class="ungkap" aria-labelledby="judul-kontak">
+          <h2 class="bagian__judul" id="judul-kontak" style="font-size: 1.5rem">Informasi kontak</h2>
+          <p class="bagian__deskripsi" style="margin-bottom: 1.5rem">
+            Tim konsultasi Data Indonesia siap membantu dari tahap asesmen hingga implementasi.
+          </p>
+
+          <div class="kontak-info__item">
+            <img src="assets/icons/email.svg" alt="" width="22" height="22" loading="lazy" />
+            <div>
+              <p class="kontak-info__label">Email</p>
+              <p class="kontak-info__nilai"><a href="mailto:info@dataindonesia.id">info@dataindonesia.id</a></p>
+            </div>
+          </div>
+          <div class="kontak-info__item">
+            <img src="assets/icons/telepon.svg" alt="" width="22" height="22" loading="lazy" />
+            <div>
+              <p class="kontak-info__label">Telepon</p>
+              <p class="kontak-info__nilai"><a href="tel:+622112345678">+62 21 1234 5678</a></p>
+            </div>
+          </div>
+          <div class="kontak-info__item">
+            <img src="assets/icons/lokasi.svg" alt="" width="22" height="22" loading="lazy" />
+            <div>
+              <p class="kontak-info__label">Kantor</p>
+              <p class="kontak-info__nilai">Jakarta, Indonesia</p>
+            </div>
+          </div>
+        </aside>
+
+        <div class="ungkap ungkap-tunda-1">
+          <form class="formulir" id="formulir-kontak" novalidate>
+            <div class="formulir__grup--dua">
+              <div class="formulir__grup">
+                <label for="nama">Nama lengkap</label>
+                <input type="text" id="nama" name="nama" autocomplete="name" required placeholder="Nama Anda" />
+              </div>
+              <div class="formulir__grup">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" autocomplete="email" required placeholder="nama@perusahaan.id" />
+              </div>
+            </div>
+
+            <div class="formulir__grup--dua">
+              <div class="formulir__grup">
+                <label for="telepon">Telepon</label>
+                <input type="tel" id="telepon" name="telepon" autocomplete="tel" placeholder="+62 ..." />
+              </div>
+              <div class="formulir__grup">
+                <label for="subjek">Subjek</label>
+                <select id="subjek" name="subjek">
+                  <option value="Konsultasi Umum">Konsultasi Umum</option>
+                  <option value="Integrasi Data">Integrasi Data</option>
+                  <option value="Dashboard & Analitik">Dashboard &amp; Analitik</option>
+                  <option value="Keamanan Data">Keamanan Data</option>
+                  <option value="Lainnya">Lainnya</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="formulir__grup">
+              <label for="pesan">Pesan</label>
+              <textarea id="pesan" name="pesan" required placeholder="Ceritakan kebutuhan atau pertanyaan Anda..."></textarea>
+            </div>
+
+            <p class="formulir__status" id="status-formulir" role="status" aria-live="polite"></p>
+
+            <button class="tombol tombol--utama" type="submit">
+              Kirim Pesan
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="wadah-kaki"></div>
+  <script src="assets/js/utama.js" defer></script>
+  <script src="assets/js/formulir.js" defer></script>
+</body>
+</html>

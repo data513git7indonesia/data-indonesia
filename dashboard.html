@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Data | Data Indonesia</title>
+  <meta name="description" content="Dashboard data Data Indonesia: tren volume, distribusi sektor, proyek wilayah, dan indikator kinerja utama." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://dataindonesia.id/dashboard.html" />
+  <meta property="og:title" content="Dashboard Data | Data Indonesia" />
+  <meta property="og:description" content="Visualisasi data operasional dan indikator kinerja." />
+  <meta property="og:image" content="assets/images/logotransparant.png" />
+  <meta name="theme-color" content="#070707" />
+  <link rel="icon" type="image/png" href="assets/images/logotransparant.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Sora:wght@400;500;600&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Sora:wght@400;500;600&display=swap" /></noscript>
+  <link rel="stylesheet" href="assets/css/gaya.css" />
+</head>
+<body>
+  <div class="pemuat" id="pemuat" role="status" aria-live="polite" aria-label="Memuat halaman">
+    <div>
+      <img class="pemuat__logo" src="assets/images/logotransparant.png" alt="" width="120" height="120" decoding="async" />
+      <div class="pemuat__garis" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div id="wadah-navigasi"></div>
+
+  <main id="konten-utama">
+    <header class="halaman-hero">
+      <div class="wadah ungkap">
+        <span class="bagian__label">Intelijen Operasional</span>
+        <h1 class="halaman-hero__judul">Dashboard</h1>
+        <p class="halaman-hero__teks">
+          Ringkasan kinerja data secara visual — tren volume, distribusi sektor, dan sebaran proyek di seluruh wilayah Indonesia.
+        </p>
+      </div>
+    </header>
+
+    <section class="bagian" aria-labelledby="judul-dashboard">
+      <div class="wadah">
+        <h2 class="sr-only" id="judul-dashboard">Panel dashboard</h2>
+
+        <div class="statistik" style="margin-bottom: 2rem" role="list">
+          <div class="statistik__item ungkap" role="listitem">
+            <div class="statistik__angka" data-penghitung="52" data-akhiran="">0</div>
+            <p class="statistik__label">Volume data (TB)</p>
+          </div>
+          <div class="statistik__item ungkap ungkap-tunda-1" role="listitem">
+            <div class="statistik__angka" data-penghitung="119" data-akhiran="">0</div>
+            <p class="statistik__label">Proyek aktif</p>
+          </div>
+          <div class="statistik__item ungkap ungkap-tunda-2" role="listitem">
+            <div class="statistik__angka" data-penghitung="86" data-akhiran="%">0</div>
+            <p class="statistik__label">SLA terpenuhi</p>
+          </div>
+          <div class="statistik__item ungkap ungkap-tunda-3" role="listitem">
+            <div class="statistik__angka" data-penghitung="7" data-akhiran="">0</div>
+            <p class="statistik__label">Wilayah utama</p>
+          </div>
+        </div>
+
+        <div class="dashboard-kisi ungkap">
+          <div class="panel">
+            <h3 class="panel__judul">Tren Volume Data 2026</h3>
+            <canvas id="grafik-tren" height="240" aria-label="Grafik tren volume data"></canvas>
+          </div>
+          <div class="panel">
+            <h3 class="panel__judul">Indikator Utama</h3>
+            <div class="metrik-kisi">
+              <div class="metrik">
+                <p class="metrik__label">Throughput harian</p>
+                <p class="metrik__nilai">1,24 TB</p>
+                <p class="metrik__tren">↑ 12% dari bulan lalu</p>
+              </div>
+              <div class="metrik">
+                <p class="metrik__label">Latensi rata-rata</p>
+                <p class="metrik__nilai">48 ms</p>
+                <p class="metrik__tren">↓ 8% lebih cepat</p>
+              </div>
+              <div class="metrik">
+                <p class="metrik__label">Pipeline sukses</p>
+                <p class="metrik__nilai">99,2%</p>
+                <p class="metrik__tren">Stabil 30 hari</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-kisi ungkap" style="margin-top: 1.25rem">
+          <div class="panel">
+            <h3 class="panel__judul">Proyek per Wilayah</h3>
+            <canvas id="grafik-wilayah" height="240" aria-label="Grafik proyek per wilayah"></canvas>
+          </div>
+          <div class="panel">
+            <h3 class="panel__judul">Distribusi Sektor</h3>
+            <canvas id="grafik-sektor" height="240" aria-label="Grafik distribusi sektor"></canvas>
+          </div>
+        </div>
+
+        <div class="panel ungkap" style="margin-top: 1.25rem">
+          <h3 class="panel__judul">Proyek Terbaru</h3>
+          <div class="tabel-bungkus">
+            <table class="tabel-data">
+              <thead>
+                <tr>
+                  <th>Nama Proyek</th>
+                  <th>Sektor</th>
+                  <th>Wilayah</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Integrasi Data Kependudukan</td>
+                  <td>Pemerintah</td>
+                  <td>Jawa</td>
+                  <td><span class="lencana">Aktif</span></td>
+                </tr>
+                <tr>
+                  <td>Dashboard Rantai Pasok</td>
+                  <td>Swasta</td>
+                  <td>Sumatera</td>
+                  <td><span class="lencana">Aktif</span></td>
+                </tr>
+                <tr>
+                  <td>Analitik Akademik</td>
+                  <td>Pendidikan</td>
+                  <td>Bali-Nusa</td>
+                  <td><span class="lencana">Uji Coba</span></td>
+                </tr>
+                <tr>
+                  <td>Monitoring Infrastruktur</td>
+                  <td>Pemerintah</td>
+                  <td>Kalimantan</td>
+                  <td><span class="lencana">Aktif</span></td>
+                </tr>
+                <tr>
+                  <td>Gudang Data Regional</td>
+                  <td>Swasta</td>
+                  <td>Sulawesi</td>
+                  <td><span class="lencana">Perencanaan</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="wadah-kaki"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+  <script src="assets/js/utama.js" defer></script>
+  <script src="assets/js/dashboard.js" defer></script>
+</body>
+</html>
