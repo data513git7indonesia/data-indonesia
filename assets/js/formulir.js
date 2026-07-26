@@ -17,7 +17,7 @@
 
   const KONFIG = {
     /* Ganti dengan URL Web App Google Apps Script Anda */
-    urlSkrip: "https://script.google.com/macros/s/GANTI_DENGAN_ID_DEPLOYMENT/exec",
+    urlSkrip: "https://script.google.com/macros/s/1Y2HK_pG8pgG5beUwR0CNQtCfmXRB8_cczlXxBaHUOKg/exec",
   };
 
   function validasiEmail(email) {
