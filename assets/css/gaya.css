@@ -1116,6 +1116,332 @@ select {
   color: var(--teks-redup);
 }
 
+/* ---------- Obrolan AI (pojok kanan bawah) ---------- */
+.obrolan {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 1200;
+  font-family: var(--font-badan);
+}
+
+.obrolan__tombol {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  border: 1px solid var(--garis);
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--emas-terang), var(--emas-redup));
+  color: var(--hitam);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 12px 32px rgba(212, 175, 55, 0.35);
+  transition: transform var(--transisi), box-shadow var(--transisi);
+}
+
+.obrolan__tombol:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 16px 36px rgba(212, 175, 55, 0.42);
+}
+
+.obrolan__tombol-ikon {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  transition: opacity var(--transisi), transform var(--transisi);
+}
+
+.obrolan__tombol-ikon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.obrolan__tombol-ikon--tutup {
+  opacity: 0;
+  transform: rotate(-45deg) scale(0.7);
+}
+
+.obrolan--buka .obrolan__tombol-ikon--chat {
+  opacity: 0;
+  transform: rotate(45deg) scale(0.7);
+}
+
+.obrolan--buka .obrolan__tombol-ikon--tutup {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+.obrolan__badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--hitam);
+  color: var(--emas-terang);
+  border: 1px solid var(--emas);
+  font-size: 0.68rem;
+  font-weight: 600;
+  display: grid;
+  place-items: center;
+}
+
+.obrolan__panel {
+  position: absolute;
+  right: 0;
+  bottom: calc(58px + 0.85rem);
+  width: min(calc(100vw - 1.5rem), 380px);
+  height: min(72svh, 540px);
+  display: flex;
+  flex-direction: column;
+  background: #0c0c0c;
+  border: 1px solid var(--garis);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+  transform-origin: bottom right;
+  animation: obrolan-muncul 0.35s var(--transisi);
+}
+
+.obrolan__panel[hidden] {
+  display: none !important;
+}
+
+@keyframes obrolan-muncul {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.obrolan__kepala {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--garis);
+  background:
+    radial-gradient(ellipse 80% 120% at 0% 0%, rgba(212, 175, 55, 0.14), transparent 55%),
+    #101010;
+}
+
+.obrolan__identitas {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.obrolan__identitas img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.obrolan__judul {
+  font-family: var(--font-tampilan);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: var(--emas-terang);
+  line-height: 1.2;
+}
+
+.obrolan__status {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.15rem;
+  font-size: 0.72rem;
+  color: var(--teks-redup);
+}
+
+.obrolan__titik {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--sukses);
+  box-shadow: 0 0 0 3px rgba(61, 155, 110, 0.2);
+  animation: obrolan-denyut 1.8s ease-in-out infinite;
+}
+
+@keyframes obrolan-denyut {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+.obrolan__tutup {
+  width: 34px;
+  height: 34px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--teks-redup);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: color var(--transisi), border-color var(--transisi);
+}
+
+.obrolan__tutup:hover {
+  color: var(--emas-terang);
+  border-color: var(--garis);
+}
+
+.obrolan__tutup svg {
+  width: 18px;
+  height: 18px;
+}
+
+.obrolan__pesan {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  scroll-behavior: smooth;
+}
+
+.obrolan__item {
+  display: flex;
+  flex-direction: column;
+  max-width: 88%;
+}
+
+.obrolan__item--pengunjung {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.obrolan__item--asisten {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.obrolan__gelembung {
+  padding: 0.75rem 0.9rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  border: 1px solid var(--garis);
+  background: var(--hitam-kartu);
+  color: var(--teks);
+}
+
+.obrolan__item--pengunjung .obrolan__gelembung {
+  background: linear-gradient(145deg, rgba(212, 175, 55, 0.22), rgba(212, 175, 55, 0.08));
+  border-color: rgba(212, 175, 55, 0.35);
+  color: var(--teks);
+}
+
+.obrolan__waktu {
+  margin-top: 0.3rem;
+  font-size: 0.65rem;
+  color: var(--teks-redup);
+  letter-spacing: 0.04em;
+}
+
+.obrolan__gelembung--ketik {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  min-height: 1.2rem;
+  padding: 0.85rem 1rem;
+}
+
+.obrolan__gelembung--ketik span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--emas);
+  animation: obrolan-titik 1.2s ease-in-out infinite;
+}
+
+.obrolan__gelembung--ketik span:nth-child(2) { animation-delay: 0.15s; }
+.obrolan__gelembung--ketik span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes obrolan-titik {
+  0%, 80%, 100% { opacity: 0.35; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-3px); }
+}
+
+.obrolan__saran {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.obrolan__saran-item {
+  padding: 0.45rem 0.7rem;
+  font-size: 0.75rem;
+  color: var(--emas-terang);
+  background: transparent;
+  border: 1px solid var(--garis);
+  cursor: pointer;
+  transition: background var(--transisi), border-color var(--transisi);
+}
+
+.obrolan__saran-item:hover {
+  background: var(--emas-halus);
+  border-color: var(--emas);
+}
+
+.obrolan__form {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.55rem;
+  padding: 0.75rem;
+  border-top: 1px solid var(--garis);
+  background: #0a0a0a;
+}
+
+.obrolan__input {
+  flex: 1;
+  resize: none;
+  min-height: 42px;
+  max-height: 110px;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--garis);
+  background: var(--hitam-lembut);
+  color: var(--teks);
+  outline: none;
+  line-height: 1.4;
+  transition: border-color var(--transisi), box-shadow var(--transisi);
+}
+
+.obrolan__input:focus {
+  border-color: var(--emas);
+  box-shadow: 0 0 0 3px var(--emas-halus);
+}
+
+.obrolan__kirim {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border: none;
+  background: linear-gradient(145deg, var(--emas-terang), var(--emas-redup));
+  color: var(--hitam);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform var(--transisi), opacity var(--transisi);
+}
+
+.obrolan__kirim:hover {
+  transform: translateY(-1px);
+}
+
+.obrolan__kirim:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.obrolan__kirim svg {
+  width: 18px;
+  height: 18px;
+}
+
 /* ---------- Responsif ---------- */
 @media (max-width: 960px) {
   .statistik {
@@ -1165,6 +1491,16 @@ select {
 
   .navigasi__nama {
     font-size: 0.8rem;
+  }
+
+  .obrolan {
+    right: 0.85rem;
+    bottom: 0.85rem;
+  }
+
+  .obrolan__panel {
+    width: min(calc(100vw - 1.1rem), 380px);
+    height: min(70svh, 520px);
   }
 }
 

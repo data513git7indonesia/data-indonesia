@@ -318,9 +318,16 @@
   async function mulai() {
     inisialisasiPemuat();
 
+    if (!document.getElementById("wadah-obrolan")) {
+      const wadah = document.createElement("div");
+      wadah.id = "wadah-obrolan";
+      document.body.appendChild(wadah);
+    }
+
     await Promise.all([
       muatKomponen("#wadah-navigasi", "navigasi.html"),
       muatKomponen("#wadah-kaki", "kaki.html"),
+      muatKomponen("#wadah-obrolan", "obrolan.html"),
     ]);
 
     inisialisasiNavigasi();
@@ -328,6 +335,10 @@
     inisialisasiUngkap();
     inisialisasiPenghitung();
     perbaruiTahun();
+
+    if (typeof window.inisialisasiObrolan === "function") {
+      window.inisialisasiObrolan();
+    }
 
     document.dispatchEvent(new CustomEvent("di-siap"));
   }

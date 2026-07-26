@@ -34,6 +34,13 @@ npx serve .
 
 atau Live Server di VS Code / Cursor.
 
+## Obrolan AI
+
+Tombol chat pojok kanan bawah tersedia di semua halaman.
+- UI: `components/obrolan.html`
+- Logika: `assets/js/obrolan.js`
+- Opsional Worker AI: `fungsi/pekerja-obrolan.js` — isi `urlApi` di `obrolan.js` setelah deploy
+
 ## Formulir → Google Sheets
 
 1. Buat Google Sheet dengan header: `Stempel Waktu | Nama | Email | Telepon | Subjek | Pesan`
