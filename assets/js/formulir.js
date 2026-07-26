@@ -58,7 +58,7 @@
         return;
       }
 
-      if (KONFIG.urlSkrip.includes("GANTI_DENGAN_ID_DEPLOYMENT")) {
+      if (KONFIG.urlSkrip.includes("1Y2HK_pG8pgG5beUwR0CNQtCfmXRB8_cczlXxBaHUOKg")) {
         setStatus(
           status,
           "Formulir siap. Hubungkan URL Google Apps Script di assets/js/formulir.js.",
