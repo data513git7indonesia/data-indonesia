@@ -158,6 +158,155 @@
     item.forEach((el) => pengamat.observe(el));
   }
 
+  /* ---------- Slider judul (hero) ---------- */
+  function inisialisasiSlider() {
+    const akar = document.getElementById("slider-judul");
+    if (!akar) return;
+
+    const slide = Array.from(akar.querySelectorAll(".slider-judul__slide"));
+    const titik = Array.from(akar.querySelectorAll(".slider-judul__titik"));
+    const panah = akar.querySelectorAll(".slider-judul__panah");
+    const batangProgres = akar.querySelector(".slider-judul__progres span");
+    const total = slide.length;
+    if (!total) return;
+
+    let indeks = slide.findIndex((s) => s.classList.contains("aktif"));
+    if (indeks < 0) indeks = 0;
+
+    const kurangiGerak = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const durasi = kurangiGerak ? 999999 : 6500;
+    let pengatur = null;
+    let sentuhX = 0;
+
+    const muatGambar = (i) => {
+      const img = slide[i]?.querySelector("img");
+      if (img && img.loading === "lazy") img.loading = "eager";
+    };
+
+    const setProgres = () => {
+      if (!batangProgres) return;
+      batangProgres.style.animation = "none";
+      void batangProgres.offsetWidth;
+      if (!kurangiGerak) {
+        batangProgres.style.animation = "";
+      }
+    };
+
+    const setTitik = () => {
+      titik.forEach((t, i) => {
+        const aktif = i === indeks;
+        t.classList.toggle("aktif", aktif);
+        t.setAttribute("aria-selected", String(aktif));
+        const isi = t.querySelector("span");
+        if (!isi) return;
+        isi.style.animation = "none";
+        void isi.offsetWidth;
+        if (aktif && !kurangiGerak) isi.style.animation = "";
+      });
+    };
+
+    const tampilkan = (baru) => {
+      indeks = (baru + total) % total;
+      slide.forEach((s, i) => {
+        const aktif = i === indeks;
+        s.classList.toggle("aktif", aktif);
+        s.setAttribute("aria-hidden", String(!aktif));
+      });
+      muatGambar(indeks);
+      muatGambar((indeks + 1) % total);
+      setTitik();
+      setProgres();
+    };
+
+    const berikutnya = () => tampilkan(indeks + 1);
+    const sebelumnya = () => tampilkan(indeks - 1);
+
+    const mulaiOtomatis = () => {
+      hentikanOtomatis();
+      if (kurangiGerak) return;
+      pengatur = window.setInterval(berikutnya, durasi);
+    };
+
+    const hentikanOtomatis = () => {
+      if (pengatur) {
+        clearInterval(pengatur);
+        pengatur = null;
+      }
+    };
+
+    panah.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (btn.dataset.arah === "prev") sebelumnya();
+        else berikutnya();
+        mulaiOtomatis();
+      });
+    });
+
+    titik.forEach((t) => {
+      t.addEventListener("click", () => {
+        tampilkan(Number(t.dataset.ke) || 0);
+        mulaiOtomatis();
+      });
+    });
+
+    akar.addEventListener("mouseenter", () => {
+      akar.classList.add("dijeda");
+      hentikanOtomatis();
+    });
+    akar.addEventListener("mouseleave", () => {
+      akar.classList.remove("dijeda");
+      mulaiOtomatis();
+    });
+    akar.addEventListener("focusin", () => {
+      akar.classList.add("dijeda");
+      hentikanOtomatis();
+    });
+    akar.addEventListener("focusout", (e) => {
+      if (!akar.contains(e.relatedTarget)) {
+        akar.classList.remove("dijeda");
+        mulaiOtomatis();
+      }
+    });
+
+    akar.addEventListener(
+      "touchstart",
+      (e) => {
+        sentuhX = e.changedTouches[0].screenX;
+      },
+      { passive: true }
+    );
+    akar.addEventListener(
+      "touchend",
+      (e) => {
+        const delta = e.changedTouches[0].screenX - sentuhX;
+        if (Math.abs(delta) < 48) return;
+        if (delta > 0) sebelumnya();
+        else berikutnya();
+        mulaiOtomatis();
+      },
+      { passive: true }
+    );
+
+    document.addEventListener("keydown", (e) => {
+      if (!akar.offsetParent) return;
+      if (e.key === "ArrowLeft") {
+        sebelumnya();
+        mulaiOtomatis();
+      } else if (e.key === "ArrowRight") {
+        berikutnya();
+        mulaiOtomatis();
+      }
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) hentikanOtomatis();
+      else mulaiOtomatis();
+    });
+
+    tampilkan(indeks);
+    mulaiOtomatis();
+  }
+
   /* ---------- Tahun footer ---------- */
   function perbaruiTahun() {
     document.querySelectorAll("[data-tahun]").forEach((el) => {
@@ -175,6 +324,7 @@
     ]);
 
     inisialisasiNavigasi();
+    inisialisasiSlider();
     inisialisasiUngkap();
     inisialisasiPenghitung();
     perbaruiTahun();

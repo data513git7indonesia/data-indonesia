@@ -8,7 +8,7 @@
   <meta name="keywords" content="data indonesia, big data, analitik, dashboard, integrasi data, transformasi digital, AI, LLM, Digital Marketing, Software Development " />
   <meta name="author" content="Data Indonesia" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://dataindonesia.id/" />
+  <link rel="canonical" href="https://data-indonesia.data-indonesia21.workers.dev/" />
 
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="id_ID" />
@@ -27,6 +27,7 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Sora:wght@400;500;600&display=swap" /></noscript>
 
   <link rel="stylesheet" href="assets/css/gaya.css" />
+  <link rel="preload" as="image" href="assets/images/slides/saas_slides.png" fetchpriority="high" />
 
   <script type="application/ld+json">
   {
@@ -63,45 +64,133 @@
   <div id="wadah-navigasi"></div>
 
   <main id="konten-utama">
-    <!-- Hero fullscreen -->
-    <section class="pahlawan" aria-label="Bagian utama">
-      <div class="pahlawan__latar" aria-hidden="true"></div>
-      <div class="pahlawan__kisi" aria-hidden="true"></div>
-      <div class="pahlawan__cahaya" aria-hidden="true"></div>
+    <!-- Hero fullscreen + slider judul -->
+    <section class="pahlawan pahlawan--slider" aria-label="Bagian utama">
+      <div
+        class="slider-judul"
+        id="slider-judul"
+        role="region"
+        aria-roledescription="karousel"
+        aria-label="Slider solusi Data Indonesia"
+      >
+        <div class="slider-judul__trek">
+          <article class="slider-judul__slide aktif" data-indeks="0" aria-hidden="false">
+            <img
+              src="assets/images/slides/saas_slides.png"
+              alt="SaaS Solusi — platform data untuk keputusan yang lebih cerdas"
+              width="1920"
+              height="1080"
+              fetchpriority="high"
+              decoding="async"
+            />
+            <div class="slider-judul__caption">
+              <span class="slider-judul__label">Solusi 01 / 05</span>
+              <h2 class="slider-judul__judul">SaaS Solusi</h2>
+              <p class="slider-judul__teks">Platform data untuk keputusan yang lebih cerdas.</p>
+            </div>
+          </article>
 
-      <div class="wadah pahlawan__isi">
-        <div class="pahlawan__merek">
+          <article class="slider-judul__slide" data-indeks="1" aria-hidden="true">
+            <img
+              src="assets/images/slides/crm_slides.png"
+              alt="CRM Solusi untuk bisnis maju"
+              width="1920"
+              height="1080"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="slider-judul__caption">
+              <span class="slider-judul__label">Solusi 02 / 05</span>
+              <h2 class="slider-judul__judul">CRM Solusi</h2>
+              <p class="slider-judul__teks">Kelola pelanggan dan pipeline penjualan secara terintegrasi.</p>
+            </div>
+          </article>
+
+          <article class="slider-judul__slide" data-indeks="2" aria-hidden="true">
+            <img
+              src="assets/images/slides/acc_slides.png"
+              alt="Accounting AI — keuangan cerdas"
+              width="1920"
+              height="1080"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="slider-judul__caption">
+              <span class="slider-judul__label">Solusi 03 / 05</span>
+              <h2 class="slider-judul__judul">Accounting AI</h2>
+              <p class="slider-judul__teks">Keuangan cerdas untuk bisnis berkelas.</p>
+            </div>
+          </article>
+
+          <article class="slider-judul__slide" data-indeks="3" aria-hidden="true">
+            <img
+              src="assets/images/slides/industri_slides.png"
+              alt="AI-Powered Industry Intelligence"
+              width="1920"
+              height="1080"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="slider-judul__caption">
+              <span class="slider-judul__label">Solusi 04 / 05</span>
+              <h2 class="slider-judul__judul">Industry Intelligence</h2>
+              <p class="slider-judul__teks">Data real-time untuk keputusan industri yang lebih kuat.</p>
+            </div>
+          </article>
+
+          <article class="slider-judul__slide" data-indeks="4" aria-hidden="true">
+            <img
+              src="assets/images/slides/presen_slides.png"
+              alt="Presentasi AI profesional"
+              width="1920"
+              height="1080"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="slider-judul__caption">
+              <span class="slider-judul__label">Solusi 05 / 05</span>
+              <h2 class="slider-judul__judul">Presentasi AI</h2>
+              <p class="slider-judul__teks">Presentasi eksekutif yang cepat, cerdas, dan berbasis data.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="slider-judul__overlay" aria-hidden="true"></div>
+
+        <div class="slider-judul__merek">
           <img
-            class="pahlawan__logo"
             src="assets/images/logotransparant.png"
             alt="Logo Data Indonesia"
-            width="180"
-            height="180"
-            fetchpriority="high"
+            width="64"
+            height="64"
             decoding="async"
           />
-          <h1 class="pahlawan__judul-merek">Data Indonesia</h1>
+          <h1>Data Indonesia</h1>
         </div>
 
-        <p class="pahlawan__headline">
-          Infrastruktur data yang andal untuk keputusan bisnis yang lebih tajam.
-        </p>
-        <p class="pahlawan__dukungan">
-          Kami membantu organisasi mengelola, mengamankan, dan memanfaatkan data dalam skala nasional.
-        </p>
+        <div class="slider-judul__kontrol">
+          <button class="slider-judul__panah" type="button" data-arah="prev" aria-label="Slide sebelumnya">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="slider-judul__panah" type="button" data-arah="next" aria-label="Slide berikutnya">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
 
-        <div class="pahlawan__aksi">
-          <a class="tombol tombol--utama" href="layanan.html">
-            Jelajahi Layanan
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-          </a>
+        <div class="slider-judul__indikator" role="tablist" aria-label="Pilih slide">
+          <button type="button" role="tab" class="slider-judul__titik aktif" aria-label="Slide 1: SaaS Solusi" aria-selected="true" data-ke="0"><span></span></button>
+          <button type="button" role="tab" class="slider-judul__titik" aria-label="Slide 2: CRM Solusi" aria-selected="false" data-ke="1"><span></span></button>
+          <button type="button" role="tab" class="slider-judul__titik" aria-label="Slide 3: Accounting AI" aria-selected="false" data-ke="2"><span></span></button>
+          <button type="button" role="tab" class="slider-judul__titik" aria-label="Slide 4: Industry Intelligence" aria-selected="false" data-ke="3"><span></span></button>
+          <button type="button" role="tab" class="slider-judul__titik" aria-label="Slide 5: Presentasi AI" aria-selected="false" data-ke="4"><span></span></button>
+        </div>
+
+        <div class="slider-judul__progres" aria-hidden="true"><span></span></div>
+
+        <div class="slider-judul__aksi">
+          <a class="tombol tombol--utama" href="layanan.html">Jelajahi Layanan</a>
           <a class="tombol tombol--garis" href="dashboard.html">Lihat Dashboard</a>
         </div>
-      </div>
-
-      <div class="pahlawan__gulir" aria-hidden="true">
-        <span>Gulir</span>
-        <div class="pahlawan__gulir-ikon"></div>
       </div>
     </section>
 
