@@ -17,11 +17,13 @@ Website resmi **Data Indonesia** — solusi data kelas perusahaan dengan identit
 ```
 assets/
   css/gaya.css
-  js/utama.js, formulir.js, dashboard.js, skrip-google-sheets.gs
+  js/utama.js, formulir.js, konfigurasi-supabase.js, obrolan.js, dashboard.js
   icons/   (SVG)
   images/  logotransparant.png, logopolos.png
+basis-data/
+  kontak.sql
 components/
-  navigasi.html, kaki.html, pemuat.html
+  navigasi.html, kaki.html, pemuat.html, obrolan.html
 ```
 
 ## Menjalankan lokal
@@ -41,9 +43,12 @@ Tombol chat pojok kanan bawah tersedia di semua halaman.
 - Logika: `assets/js/obrolan.js`
 - Opsional Worker AI: `fungsi/pekerja-obrolan.js` — isi `urlApi` di `obrolan.js` setelah deploy
 
-## Formulir → Google Sheets
+## Formulir Kontak → Supabase
 
-1. Buat Google Sheet dengan header: `Stempel Waktu | Nama | Email | Telepon | Subjek | Pesan`
-2. Tempel kode dari `assets/js/skrip-google-sheets.gs` ke Apps Script
-3. Deploy sebagai **Web App** (akses: Anyone)
-4. Salin URL ke `urlSkrip` di `assets/js/formulir.js`
+1. Buka **Supabase Dashboard → SQL Editor**
+2. Salin & jalankan seluruh isi `basis-data/kontak.sql`
+3. Ambil **Project URL** dan **anon public key** dari Project Settings → API
+4. Tempel ke `assets/js/konfigurasi-supabase.js`
+5. Uji kirim pesan dari `kontak.html`
+
+Pesan tersimpan di tabel `public.kontak` dengan status awal `baru`.

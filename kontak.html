@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kontak | Data Indonesia</title>
-  <meta name="description" content="Hubungi Data Indonesia. Kirim pesan melalui formulir — data otomatis tersimpan ke Google Sheets." />
+  <meta name="description" content="Hubungi Data Indonesia. Kirim pesan melalui formulir — data otomatis tersimpan ke database Supabase." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://dataindonesia.id/kontak.html" />
   <meta property="og:title" content="Kontak | Data Indonesia" />
@@ -34,7 +34,7 @@
         <span class="bagian__label">Hubungi Kami</span>
         <h1 class="halaman-hero__judul">Kontak</h1>
         <p class="halaman-hero__teks">
-          Sampaikan kebutuhan Anda. Setiap pesan dari formulir ini dapat otomatis masuk tim kami.
+          Sampaikan kebutuhan Anda. Setiap pesan dari formulir ini otomatis tersimpan ke database Supabase tim kami.
         </p>
       </div>
     </header>
@@ -118,6 +118,8 @@
   </main>
 
   <div id="wadah-kaki"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="assets/js/konfigurasi-supabase.js" defer></script>
   <script src="assets/js/obrolan.js" defer></script>
   <script src="assets/js/utama.js" defer></script>
   <script src="assets/js/formulir.js" defer></script>

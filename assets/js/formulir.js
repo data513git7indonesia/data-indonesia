@@ -1,24 +1,17 @@
 /**
- * Data Indonesia — Formulir Kontak → Google Sheets
+ * Data Indonesia — Formulir Kontak → Supabase
  *
- * CARA MENGHUBUNGKAN:
- * 1. Buat Google Sheet baru dengan header baris 1:
- *    Stempel Waktu | Nama | Email | Telepon | Subjek | Pesan
- * 2. Extensi → Apps Script, tempel kode dari berkas:
- *    assets/js/skrip-google-sheets.gs
- * 3. Deploy → New deployment → Web app
- *    - Execute as: Me
- *    - Who has access: Anyone
- * 4. Salin URL Web App ke KONFIG.urlSkrip di bawah.
+ * Prasyarat:
+ * 1. Jalankan SQL: basis-data/kontak.sql di Supabase SQL Editor
+ * 2. Isi url & kunciAnon di assets/js/konfigurasi-supabase.js
  */
 
 (function () {
   "use strict";
 
-  const KONFIG = {
-    /* Ganti dengan URL Web App Google Apps Script Anda */
-    urlSkrip: "https://script.google.com/macros/s/1Y2HK_pG8pgG5beUwR0CNQtCfmXRB8_cczlXxBaHUOKg/exec",
-  };
+  function ambilKonfig() {
+    return window.KONFIG_SUPABASE || {};
+  }
 
   function validasiEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -30,12 +23,59 @@
     elemen.className = "formulir__status" + (kelas ? " " + kelas : "");
   }
 
+  function konfigSiap(konfig) {
+    return (
+      konfig.url &&
+      konfig.kunciAnon &&
+      !String(konfig.url).includes("GANTI_PROJECT_REF") &&
+      !String(konfig.kunciAnon).includes("GANTI_DENGAN_ANON_PUBLIC_KEY")
+    );
+  }
+
+  function buatKlienSupabase(konfig) {
+    if (!window.supabase || typeof window.supabase.createClient !== "function") {
+      throw new Error("Supabase SDK belum dimuat.");
+    }
+    return window.supabase.createClient(konfig.url, konfig.kunciAnon, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+      },
+    });
+  }
+
+  async function simpanKeSupabase(klien, konfig, data) {
+    const tabel = konfig.tabelKontak || "kontak";
+    const baris = {
+      nama: data.nama,
+      email: data.email,
+      telepon: data.telepon || null,
+      subjek: data.subjek || "Konsultasi Umum",
+      pesan: data.pesan,
+      status: "baru",
+      sumber: "website",
+      user_agent: navigator.userAgent || null,
+    };
+
+    const { data: hasil, error } = await klien.from(tabel).insert(baris).select("id").single();
+
+    if (error) {
+      const err = new Error(error.message || "Gagal menyimpan ke Supabase");
+      err.kode = error.code;
+      err.detail = error.details;
+      throw err;
+    }
+
+    return hasil;
+  }
+
   function inisialisasiFormulir() {
     const form = document.getElementById("formulir-kontak");
     if (!form) return;
 
     const status = document.getElementById("status-formulir");
     const tombol = form.querySelector('[type="submit"]');
+    const konfig = ambilKonfig();
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -53,15 +93,25 @@
         return;
       }
 
+      if (data.nama.length < 2) {
+        setStatus(status, "Nama terlalu pendek.", "gagal");
+        return;
+      }
+
       if (!validasiEmail(data.email)) {
         setStatus(status, "Format email tidak valid.", "gagal");
         return;
       }
 
-      if (KONFIG.urlSkrip.includes("1Y2HK_pG8pgG5beUwR0CNQtCfmXRB8_cczlXxBaHUOKg")) {
+      if (data.pesan.length < 5) {
+        setStatus(status, "Pesan terlalu pendek. Mohon jelaskan kebutuhan Anda.", "gagal");
+        return;
+      }
+
+      if (!konfigSiap(konfig)) {
         setStatus(
           status,
-          "Formulir siap. Hubungkan URL Google Apps Script di assets/js/formulir.js.",
+          "Supabase belum dikonfigurasi. Isi url & kunciAnon di assets/js/konfigurasi-supabase.js.",
           "gagal"
         );
         return;
@@ -72,21 +122,26 @@
         tombol.dataset.labelAsli = tombol.textContent;
         tombol.textContent = "Mengirim...";
       }
-      setStatus(status, "Mengirim pesan Anda...", "memuat");
+      setStatus(status, "Menyimpan pesan ke database...", "memuat");
 
       try {
-        await fetch(KONFIG.urlSkrip, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        });
-
+        const klien = buatKlienSupabase(konfig);
+        await simpanKeSupabase(klien, konfig, data);
         form.reset();
-        setStatus(status, "Pesan berhasil dikirim. Tim kami akan segera menghubungi Anda.", "sukses");
+        setStatus(
+          status,
+          "Pesan berhasil dikirim dan tersimpan. Tim kami akan segera menghubungi Anda.",
+          "sukses"
+        );
       } catch (galat) {
-        console.error(galat);
-        setStatus(status, "Gagal mengirim. Periksa koneksi atau konfigurasi Google Sheets.", "gagal");
+        console.error("Formulir kontak Supabase:", galat);
+        let pesanGalat = "Gagal mengirim. Periksa koneksi atau konfigurasi Supabase.";
+        if (galat && /row-level security|RLS|permission|policy/i.test(String(galat.message || ""))) {
+          pesanGalat = "Gagal menyimpan: kebijakan RLS Supabase menolak insert. Jalankan ulang basis-data/kontak.sql.";
+        } else if (galat && galat.message) {
+          pesanGalat = "Gagal mengirim: " + galat.message;
+        }
+        setStatus(status, pesanGalat, "gagal");
       } finally {
         if (tombol) {
           tombol.disabled = false;
