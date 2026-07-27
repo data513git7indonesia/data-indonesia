@@ -26,9 +26,11 @@ components/
   navigasi.html, kaki.html, pemuat.html, obrolan.html, sosial.html
 ```
 
-## Media sosial (sidebar)
+## Media sosial
 
-Sidebar mengambang kiri di semua halaman. Atur URL di `assets/js/konfigurasi-sosial.js`.
+- Sidebar mengambang kiri di semua halaman
+- Semua tautan juga ditampilkan di **footer**
+- Atur URL di `assets/js/konfigurasi-sosial.js` (berlaku untuk sidebar + footer)
 
 ## Menjalankan lokal
 

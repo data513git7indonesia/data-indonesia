@@ -1,10 +1,10 @@
 /**
- * Data Indonesia — Sidebar media sosial (mobile toggle)
+ * Data Indonesia — Media sosial (sidebar + footer)
  */
 (function () {
   "use strict";
 
-  function inisialisasiSosial() {
+  function inisialisasiSosialBar() {
     const bar = document.getElementById("sosial-bar");
     const toggle = document.getElementById("sosial-bar-toggle");
     if (!bar || !toggle || bar.dataset.siap === "1") return;
@@ -36,27 +36,35 @@
   function terapkanTautanSosial() {
     const cfg = window.KONFIG_SOSIAL;
     if (!cfg) return;
-    const peta = [
-      ["Facebook", cfg.facebook],
-      ["Instagram", cfg.instagram],
-      ["LinkedIn", cfg.linkedin],
-      ["YouTube", cfg.youtube],
-      ["TikTok", cfg.tiktok],
-      ["WhatsApp", cfg.whatsapp],
-      ["Telegram", cfg.telegram],
-      ["X", cfg.x],
-      ["Lynk", cfg.lynk],
-      ["Email", cfg.email],
-    ];
+
+    document.querySelectorAll("[data-sosial]").forEach((el) => {
+      const kunci = el.getAttribute("data-sosial");
+      const url = cfg[kunci];
+      if (url) el.setAttribute("href", url);
+    });
+
+    /* Sidebar memakai title sebagai kunci tampilan */
+    const petaJudul = {
+      Facebook: cfg.facebook,
+      Instagram: cfg.instagram,
+      LinkedIn: cfg.linkedin,
+      YouTube: cfg.youtube,
+      TikTok: cfg.tiktok,
+      WhatsApp: cfg.whatsapp,
+      Telegram: cfg.telegram,
+      X: cfg.x,
+      Lynk: cfg.lynk,
+      Email: cfg.email,
+    };
+
     document.querySelectorAll(".sosial-bar__item[title]").forEach((el) => {
-      const judul = el.getAttribute("title");
-      const item = peta.find(([nama]) => nama === judul);
-      if (item && item[1]) el.setAttribute("href", item[1]);
+      const url = petaJudul[el.getAttribute("title")];
+      if (url) el.setAttribute("href", url);
     });
   }
 
   window.inisialisasiSosial = function () {
-    inisialisasiSosial();
+    inisialisasiSosialBar();
     terapkanTautanSosial();
   };
 

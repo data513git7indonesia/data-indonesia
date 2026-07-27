@@ -1395,6 +1395,58 @@ select {
   color: var(--emas-terang);
 }
 
+.kaki__sosial {
+  margin-bottom: 2rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--garis);
+}
+
+.kaki__sosial-daftar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.kaki__sosial-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 999px;
+  color: var(--emas-terang);
+  background: rgba(12, 12, 12, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  transition:
+    transform var(--transisi),
+    background var(--transisi),
+    border-color var(--transisi),
+    color var(--transisi),
+    box-shadow var(--transisi);
+}
+
+.kaki__sosial-item svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.kaki__sosial-item:hover,
+.kaki__sosial-item:focus-visible {
+  transform: translateY(-2px);
+  color: var(--hitam);
+  background: linear-gradient(145deg, var(--emas-terang), var(--emas-redup));
+  border-color: var(--emas-terang);
+  box-shadow: 0 8px 22px rgba(212, 175, 55, 0.28);
+  outline: none;
+}
+
 .kaki__bawah {
   padding-top: 1.5rem;
   border-top: 1px solid var(--garis);
