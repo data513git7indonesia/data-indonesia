@@ -54,37 +54,31 @@ execute function public.set_diperbarui_pada();
 -- 5) Row Level Security (RLS)
 alter table public.kontak enable row level security;
 
--- Hapus kebijakan lama jika ada (aman dijalankan ulang)
-drop policy if exists "Izinkan insert kontak publik" on public.kontak;
-drop policy if exists "Izinkan baca kontak terautentikasi" on public.kontak;
-drop policy if exists "Izinkan ubah kontak terautentikasi" on public.kontak;
+-- Pengunjung boleh mengirim pesan (semua peran API)
+-- Catatan: tanpa klausa TO agar berlaku untuk anon/authenticated/public
+drop policy if exists "kontak_insert_publik" on public.kontak;
+drop policy if exists "kontak_select_admin" on public.kontak;
+drop policy if exists "kontak_update_admin" on public.kontak;
+drop policy if exists "kontak_allow_insert" on public.kontak;
+drop policy if exists "kontak_allow_select_auth" on public.kontak;
+drop policy if exists "kontak_allow_update_auth" on public.kontak;
 
--- Pengunjung (anon + authenticated) boleh mengirim pesan
-create policy "Izinkan insert kontak publik"
+create policy "kontak_allow_insert"
 on public.kontak
+as permissive
 for insert
-to anon, authenticated
-with check (
-  char_length(trim(nama)) >= 2
-  and char_length(trim(email)) >= 5
-  and char_length(trim(pesan)) >= 5
-  and char_length(nama) <= 120
-  and char_length(email) <= 160
-  and char_length(coalesce(telepon, '')) <= 40
-  and char_length(subjek) <= 120
-  and char_length(pesan) <= 5000
-);
+with check (true);
 
--- Hanya user login (dashboard admin) yang boleh membaca
-create policy "Izinkan baca kontak terautentikasi"
+create policy "kontak_allow_select_auth"
 on public.kontak
+as permissive
 for select
 to authenticated
 using (true);
 
--- Hanya user login yang boleh mengubah status/catatan
-create policy "Izinkan ubah kontak terautentikasi"
+create policy "kontak_allow_update_auth"
 on public.kontak
+as permissive
 for update
 to authenticated
 using (true)

@@ -13,6 +13,6 @@
  */
 window.KONFIG_SUPABASE = {
   url: "https://mcsgtqzzstlxaovyedit.supabase.co",
-  kunciAnon: "sb_publishable_FNnVkCvQJGE0EQQC58cZBQ_Rw6IaEtw",
+  kunciAnon: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1jc2d0cXp6c3RseGFvdnllZGl0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUwODM2MTIsImV4cCI6MjEwMDY1OTYxMn0.Zq7cD5sLeI02Fcug9nNhLEtpuW5dYNdyfBOADZvGDRg",
   tabelKontak: "kontak",
 };

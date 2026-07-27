@@ -49,6 +49,8 @@
     if (!navigasi) return;
 
     const halaman = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+    const sedangProduk = halaman === "produk.html" || halaman.startsWith("produk-");
+
     document.querySelectorAll(".navigasi__tautan").forEach((tautan) => {
       const href = (tautan.getAttribute("href") || "").toLowerCase();
       if (href === halaman || (halaman === "" && href === "index.html")) {
@@ -56,11 +58,59 @@
       }
     });
 
+    document.querySelectorAll(".navigasi__submenu-tautan").forEach((tautan) => {
+      const href = (tautan.getAttribute("href") || "").toLowerCase();
+      if (href === halaman) tautan.classList.add("aktif");
+    });
+
+    if (sedangProduk) {
+      document.querySelector(".navigasi__tautan--dropdown")?.classList.add("aktif");
+    }
+
     const perbaruiGulir = () => {
       navigasi.classList.toggle("menggulir", window.scrollY > 24);
     };
     perbaruiGulir();
     window.addEventListener("scroll", perbaruiGulir, { passive: true });
+
+    /* Dropdown Product */
+    document.querySelectorAll("[data-dropdown]").forEach((dropdown) => {
+      const tombolDropdown = dropdown.querySelector("[data-dropdown-tombol]");
+      const panel = dropdown.querySelector("[data-dropdown-panel]");
+      if (!tombolDropdown || !panel) return;
+
+      const setBuka = (buka) => {
+        dropdown.classList.toggle("buka", buka);
+        panel.hidden = !buka;
+        tombolDropdown.setAttribute("aria-expanded", String(buka));
+      };
+
+      tombolDropdown.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setBuka(panel.hidden);
+      });
+
+      dropdown.addEventListener("mouseenter", () => {
+        if (window.matchMedia("(min-width: 961px)").matches) setBuka(true);
+      });
+      dropdown.addEventListener("mouseleave", () => {
+        if (window.matchMedia("(min-width: 961px)").matches) setBuka(false);
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest("[data-dropdown]")) {
+        document.querySelectorAll("[data-dropdown]").forEach((dropdown) => {
+          const panel = dropdown.querySelector("[data-dropdown-panel]");
+          const tombolDropdown = dropdown.querySelector("[data-dropdown-tombol]");
+          if (!panel || !tombolDropdown) return;
+          dropdown.classList.remove("buka");
+          panel.hidden = true;
+          tombolDropdown.setAttribute("aria-expanded", "false");
+        });
+      }
+    });
 
     if (tombol && menu) {
       tombol.addEventListener("click", () => {

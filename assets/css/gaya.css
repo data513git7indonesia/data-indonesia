@@ -269,6 +269,240 @@ select {
   transform: translateY(-6.5px) rotate(-45deg);
 }
 
+/* ---------- Dropdown Product ---------- */
+.navigasi__dropdown {
+  position: relative;
+}
+
+.navigasi__tautan--dropdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+.navigasi__tautan--dropdown::after {
+  left: 0.9rem;
+  right: 1.6rem;
+}
+
+.navigasi__chevron {
+  width: 14px;
+  height: 14px;
+  transition: transform var(--transisi);
+}
+
+.navigasi__dropdown.buka .navigasi__chevron,
+.navigasi__dropdown:hover .navigasi__chevron {
+  transform: rotate(180deg);
+}
+
+.navigasi__submenu {
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  left: 0;
+  min-width: 280px;
+  max-height: min(70vh, 480px);
+  overflow-y: auto;
+  padding: 0.55rem;
+  background: rgba(10, 10, 10, 0.96);
+  border: 1px solid var(--garis);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  z-index: 1100;
+}
+
+.navigasi__submenu[hidden] {
+  display: none !important;
+}
+
+.navigasi__submenu-tautan {
+  display: block;
+  padding: 0.65rem 0.8rem;
+  font-size: 0.8rem;
+  color: var(--teks-redup);
+  border: 1px solid transparent;
+  transition: color var(--transisi), background var(--transisi), border-color var(--transisi);
+}
+
+.navigasi__submenu-tautan:hover,
+.navigasi__submenu-tautan.aktif {
+  color: var(--emas-terang);
+  background: var(--emas-halus);
+  border-color: var(--garis);
+}
+
+.navigasi__submenu-tautan--semua {
+  margin-bottom: 0.35rem;
+  color: var(--emas);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  border-bottom: 1px solid var(--garis);
+}
+
+/* ---------- Halaman Product ---------- */
+.kisi-produk {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.35rem;
+}
+
+.kartu-produk {
+  padding: 1.5rem 0 0;
+  border-top: 1px solid var(--garis);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-height: 100%;
+  transition: border-color var(--transisi);
+}
+
+.kartu-produk:hover {
+  border-top-color: var(--emas);
+}
+
+.kartu-produk__label {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--emas);
+  font-weight: 600;
+}
+
+.kartu-produk__judul {
+  font-family: var(--font-tampilan);
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  color: var(--teks);
+}
+
+.kartu-produk__teks {
+  font-size: 0.92rem;
+  color: var(--teks-redup);
+  flex: 1;
+}
+
+.kartu-produk__aksi {
+  margin-top: 0.5rem;
+}
+
+.produk-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 1.1rem 0 0;
+}
+
+.produk-meta span {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--emas-terang);
+  border: 1px solid var(--garis);
+  padding: 0.35rem 0.65rem;
+}
+
+.produk-detail__kisi {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.produk-detail__konten p {
+  color: var(--teks-redup);
+  margin-bottom: 1rem;
+}
+
+.produk-detail__konten h2 {
+  font-family: var(--font-tampilan);
+  font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+  letter-spacing: 0.04em;
+  margin: 2rem 0 0.85rem;
+  color: var(--emas-terang);
+}
+
+.produk-detail__konten h3 {
+  font-size: 1.02rem;
+  margin: 1.35rem 0 0.55rem;
+  color: var(--teks);
+}
+
+.produk-detail__konten ul {
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.produk-detail__konten li {
+  position: relative;
+  padding-left: 1.2rem;
+  color: var(--teks-redup);
+  font-size: 0.95rem;
+}
+
+.produk-detail__konten li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 6px;
+  height: 6px;
+  background: var(--emas);
+}
+
+.produk-detail__samping {
+  position: sticky;
+  top: calc(var(--nav-tinggi) + 1.25rem);
+  border: 1px solid var(--garis);
+  background: var(--hitam-kartu);
+  padding: 1.35rem;
+}
+
+.produk-detail__samping h2 {
+  font-family: var(--font-tampilan);
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  color: var(--emas-terang);
+  margin-bottom: 0.85rem;
+}
+
+.produk-detail__samping p {
+  font-size: 0.9rem;
+  color: var(--teks-redup);
+  margin-bottom: 1rem;
+}
+
+.produk-detail__samping .tombol {
+  width: 100%;
+  margin-bottom: 0.65rem;
+}
+
+.produk-detail__daftar-lain {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--garis);
+}
+
+.produk-detail__daftar-lain a {
+  font-size: 0.84rem;
+  color: var(--teks-redup);
+  transition: color var(--transisi);
+}
+
+.produk-detail__daftar-lain a:hover,
+.produk-detail__daftar-lain a.aktif {
+  color: var(--emas-terang);
+}
+
 /* ---------- Tombol ---------- */
 .tombol {
   display: inline-flex;
@@ -1468,11 +1702,14 @@ select {
     inset: 0;
     background: rgba(7, 7, 7, 0.97);
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
     gap: 0.35rem;
     opacity: 0;
     visibility: hidden;
     transition: opacity var(--transisi), visibility var(--transisi);
+    overflow-y: auto;
+    padding: calc(var(--nav-tinggi) + 1rem) 1rem 2rem;
   }
 
   .navigasi__menu.buka {
@@ -1493,6 +1730,37 @@ select {
     font-size: 0.8rem;
   }
 
+  .navigasi__dropdown {
+    width: min(100%, 320px);
+  }
+
+  .navigasi__tautan--dropdown {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .navigasi__submenu {
+    position: static;
+    min-width: 0;
+    width: 100%;
+    max-height: none;
+    margin-top: 0.35rem;
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .kisi-produk {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .produk-detail__kisi {
+    grid-template-columns: 1fr;
+  }
+
+  .produk-detail__samping {
+    position: static;
+  }
+
   .obrolan {
     right: 0.85rem;
     bottom: 0.85rem;
@@ -1511,6 +1779,7 @@ select {
 
   .statistik,
   .kisi-layanan,
+  .kisi-produk,
   .formulir__grup--dua {
     grid-template-columns: 1fr;
   }

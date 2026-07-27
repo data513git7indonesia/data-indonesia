@@ -1,9 +1,9 @@
 /**
- * Data Indonesia — Formulir Kontak → Supabase
+ * Data Indonesia — Formulir Kontak → Supabase (REST)
  *
  * Prasyarat:
- * 1. Jalankan SQL: basis-data/kontak.sql di Supabase SQL Editor
- * 2. Isi url & kunciAnon di assets/js/konfigurasi-supabase.js
+ * 1. Jalankan basis-data/perbaiki-rls-kontak.sql di SQL Editor
+ * 2. Pastikan url + anon JWT key di konfigurasi-supabase.js
  */
 
 (function () {
@@ -32,20 +32,10 @@
     );
   }
 
-  function buatKlienSupabase(konfig) {
-    if (!window.supabase || typeof window.supabase.createClient !== "function") {
-      throw new Error("Supabase SDK belum dimuat.");
-    }
-    return window.supabase.createClient(konfig.url, konfig.kunciAnon, {
-      auth: {
-        persistSession: false,
-        autoRefreshToken: false,
-      },
-    });
-  }
+  async function simpanKeSupabase(konfig, data) {
+    const tabel = encodeURIComponent(konfig.tabelKontak || "kontak");
+    const endpoint = String(konfig.url).replace(/\/$/, "") + "/rest/v1/" + tabel;
 
-  async function simpanKeSupabase(klien, konfig, data) {
-    const tabel = konfig.tabelKontak || "kontak";
     const baris = {
       nama: data.nama,
       email: data.email,
@@ -54,19 +44,35 @@
       pesan: data.pesan,
       status: "baru",
       sumber: "website",
-      user_agent: navigator.userAgent || null,
+      user_agent: (navigator.userAgent || "").slice(0, 500) || null,
     };
 
-    const { data: hasil, error } = await klien.from(tabel).insert(baris).select("id").single();
+    const respons = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        apikey: konfig.kunciAnon,
+        Authorization: "Bearer " + konfig.kunciAnon,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify(baris),
+    });
 
-    if (error) {
-      const err = new Error(error.message || "Gagal menyimpan ke Supabase");
-      err.kode = error.code;
-      err.detail = error.details;
-      throw err;
+    if (respons.ok || respons.status === 201) {
+      return;
     }
 
-    return hasil;
+    let detail = "";
+    try {
+      const payload = await respons.json();
+      detail = payload.message || payload.error_description || payload.error || JSON.stringify(payload);
+    } catch (_) {
+      detail = (await respons.text()) || respons.statusText;
+    }
+
+    const err = new Error(detail || "Gagal menyimpan ke Supabase");
+    err.status = respons.status;
+    throw err;
   }
 
   function inisialisasiFormulir() {
@@ -125,8 +131,7 @@
       setStatus(status, "Menyimpan pesan ke database...", "memuat");
 
       try {
-        const klien = buatKlienSupabase(konfig);
-        await simpanKeSupabase(klien, konfig, data);
+        await simpanKeSupabase(konfig, data);
         form.reset();
         setStatus(
           status,
@@ -135,12 +140,16 @@
         );
       } catch (galat) {
         console.error("Formulir kontak Supabase:", galat);
+        const pesanAsli = String(galat && galat.message ? galat.message : "");
         let pesanGalat = "Gagal mengirim. Periksa koneksi atau konfigurasi Supabase.";
-        if (galat && /row-level security|RLS|permission|policy/i.test(String(galat.message || ""))) {
-          pesanGalat = "Gagal menyimpan: kebijakan RLS Supabase menolak insert. Jalankan ulang basis-data/kontak.sql.";
-        } else if (galat && galat.message) {
-          pesanGalat = "Gagal mengirim: " + galat.message;
+
+        if (/row-level security|RLS|policy/i.test(pesanAsli) || galat.status === 401) {
+          pesanGalat =
+            "Masih ditolak RLS (401). Jalankan SEMUA isi basis-data/perbaiki-rls-kontak.sql di SQL Editor sampai langkah uji sukses.";
+        } else if (pesanAsli) {
+          pesanGalat = "Gagal mengirim: " + pesanAsli;
         }
+
         setStatus(status, pesanGalat, "gagal");
       } finally {
         if (tombol) {
