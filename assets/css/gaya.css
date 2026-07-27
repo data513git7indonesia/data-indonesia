@@ -1458,17 +1458,9 @@ select {
   color: var(--teks-redup);
 }
 
-/* ---------- Sidebar Media Sosial (Premium) ---------- */
+/* ---------- Sidebar Media Sosial (Premium) — dinonaktifkan ---------- */
 .sosial-bar {
-  position: absolute;
-  left: 0;
-  top: 35%;
-  transform: none;
-  z-index: 1180;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  pointer-events: none;
+  display: none !important;
 }
 
 .sosial-bar__toggle {
