@@ -25,7 +25,7 @@
     "- Industry Intelligence untuk operasional industri",
     "- Presentasi AI untuk eksekutif",
     "- Integrasi data, keamanan, dashboard, dan konsultasi tata kelola",
-    "Kontak: info@dataindonesia.id, +62 21 1234 5678, Jakarta. Form kontak di halaman kontak.html.",
+    "Kontak: email data.indonesia21@gmail.com. Form kontak di halaman kontak.html.",
     "Jika ditanya harga, jelaskan bahwa penawaran disesuaikan kebutuhan dan arahkan ke konsultasi/form kontak.",
     "Jangan mengarang fakta hukum/keuangan sensitif. Jika tidak tahu, sarankan menghubungi tim manusia.",
   ].join(" ");
@@ -115,7 +115,7 @@
       return "Halo! Ada yang bisa saya bantu terkait layanan Data Indonesia?";
     }
     if (/harga|biaya|paket|tarif/.test(p)) {
-      return "Penawaran kami disesuaikan dengan kebutuhan organisasi Anda. Silakan isi formulir di halaman Kontak atau email info@dataindonesia.id agar tim kami menyiapkan estimasi.";
+      return "Penawaran kami disesuaikan dengan kebutuhan organisasi Anda. Silakan isi formulir di halaman Kontak atau email data.indonesia21@gmail.com agar tim kami menyiapkan estimasi.";
     }
     if (/crm/.test(p)) {
       return "CRM Solusi Data Indonesia membantu mengelola pelanggan, pipeline penjualan, dan analitik secara terintegrasi. Ingin saya jelaskan fitur utamanya atau cara demo?";
@@ -130,7 +130,7 @@
       return "SaaS Solusi kami menyatukan analitik, visualisasi, dan pengelolaan data skala perusahaan. Anda bisa melihat contohnya di halaman Dashboard dan Layanan.";
     }
     if (/kontak|konsultasi|hubungi|demo|meeting/.test(p)) {
-      return "Untuk konsultasi atau demo, buka halaman Kontak, telepon +62 21 1234 5678, atau email info@dataindonesia.id. Tim kami siap membantu.";
+      return "Untuk konsultasi atau demo, buka halaman Kontak atau email data.indonesia21@gmail.com. Tim kami siap membantu.";
     }
     if (/layanan|produk|solusi/.test(p)) {
       return "Layanan utama kami: SaaS Solusi, CRM, Accounting AI, Industry Intelligence, Presentasi AI, plus integrasi data, keamanan, dan dashboard eksekutif. Mau fokus ke salah satu?";

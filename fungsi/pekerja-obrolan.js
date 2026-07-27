@@ -43,7 +43,7 @@ export default {
       const sistem =
         "Anda adalah Asisten DI, chatbot resmi Data Indonesia. Jawab ringkas dalam Bahasa Indonesia. " +
         "Layanan: SaaS, CRM, Accounting AI, Industry Intelligence, Presentasi AI, integrasi data, dashboard, keamanan. " +
-        "Kontak: info@dataindonesia.id, +62 21 1234 5678.";
+        "Kontak: email data.indonesia21@gmail.com.";
 
       const messages = [
         { role: "system", content: sistem },
@@ -63,7 +63,7 @@ export default {
 
       if (!balasan) {
         balasan =
-          "Terima kasih. Tim Data Indonesia siap membantu. Silakan lanjutkan pertanyaan Anda atau hubungi info@dataindonesia.id.";
+          "Terima kasih. Tim Data Indonesia siap membantu. Silakan lanjutkan pertanyaan Anda atau hubungi data.indonesia21@gmail.com.";
       }
 
       return new Response(JSON.stringify({ balasan }), {

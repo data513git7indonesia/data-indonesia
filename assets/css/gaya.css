@@ -138,22 +138,38 @@ select {
   right: 0;
   z-index: 1000;
   height: var(--nav-tinggi);
-  transition: background var(--transisi), border-color var(--transisi), backdrop-filter var(--transisi);
+  transition: border-color var(--transisi);
   border-bottom: 1px solid transparent;
+  overflow: visible;
+}
+
+.navigasi::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: transparent;
+  transition: background var(--transisi), backdrop-filter var(--transisi);
+  pointer-events: none;
 }
 
 .navigasi.menggulir {
-  background: rgba(7, 7, 7, 0.88);
-  backdrop-filter: blur(14px);
   border-bottom-color: var(--garis);
 }
 
+.navigasi.menggulir::before {
+  background: rgba(7, 7, 7, 0.88);
+  backdrop-filter: blur(14px);
+}
+
 .navigasi__dalam {
+  position: relative;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  overflow: visible;
 }
 
 .navigasi__merek {
@@ -182,6 +198,7 @@ select {
   display: flex;
   align-items: center;
   gap: 0.15rem;
+  overflow: visible;
 }
 
 .navigasi__tautan {
@@ -272,60 +289,99 @@ select {
 /* ---------- Dropdown Product ---------- */
 .navigasi__dropdown {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
-.navigasi__tautan--dropdown {
+.navigasi__dropdown-atas {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font: inherit;
+  gap: 0.1rem;
 }
 
-.navigasi__tautan--dropdown::after {
-  left: 0.9rem;
-  right: 1.6rem;
+.navigasi__tautan--produk {
+  padding-right: 0.35rem;
+}
+
+.navigasi__dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--teks-redup);
+  cursor: pointer;
+  transition: color var(--transisi), border-color var(--transisi), background var(--transisi);
+}
+
+.navigasi__dropdown-toggle:hover,
+.navigasi__dropdown.buka .navigasi__dropdown-toggle {
+  color: var(--emas-terang);
+  border-color: var(--garis);
+  background: var(--emas-halus);
 }
 
 .navigasi__chevron {
   width: 14px;
   height: 14px;
-  transition: transform var(--transisi);
+  transition: transform 0.25s ease;
+  pointer-events: none;
 }
 
-.navigasi__dropdown.buka .navigasi__chevron,
-.navigasi__dropdown:hover .navigasi__chevron {
+.navigasi__dropdown.buka .navigasi__chevron {
   transform: rotate(180deg);
 }
 
 .navigasi__submenu {
   position: absolute;
-  top: calc(100% + 0.55rem);
+  top: 100%;
   left: 0;
   min-width: 280px;
-  max-height: min(70vh, 480px);
+  max-height: min(70vh, 520px);
   overflow-y: auto;
   padding: 0.55rem;
-  background: rgba(10, 10, 10, 0.96);
+  margin: 0;
+  background: #0c0c0c;
   border: 1px solid var(--garis);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(12px);
-  z-index: 1100;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+  z-index: 1200;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
 }
 
-.navigasi__submenu[hidden] {
-  display: none !important;
+/* Jembatan hover agar submenu tidak tertutup saat kursor bergerak */
+.navigasi__submenu::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -14px;
+  height: 14px;
+}
+
+.navigasi__dropdown.buka .navigasi__submenu,
+.navigasi__dropdown:hover .navigasi__submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .navigasi__submenu-tautan {
   display: block;
-  padding: 0.65rem 0.8rem;
+  padding: 0.7rem 0.85rem;
   font-size: 0.8rem;
   color: var(--teks-redup);
   border: 1px solid transparent;
   transition: color var(--transisi), background var(--transisi), border-color var(--transisi);
+  cursor: pointer;
 }
 
 .navigasi__submenu-tautan:hover,
@@ -1731,12 +1787,26 @@ select {
   }
 
   .navigasi__dropdown {
-    width: min(100%, 320px);
+    width: min(100%, 340px);
   }
 
-  .navigasi__tautan--dropdown {
+  .navigasi__dropdown-atas {
     width: 100%;
     justify-content: center;
+  }
+
+  .navigasi__dropdown:hover .navigasi__submenu {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(6px);
+  }
+
+  .navigasi__dropdown.buka .navigasi__submenu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 
   .navigasi__submenu {
@@ -1744,9 +1814,13 @@ select {
     min-width: 0;
     width: 100%;
     max-height: none;
-    margin-top: 0.35rem;
+    margin-top: 0.45rem;
     box-shadow: none;
     background: rgba(255, 255, 255, 0.03);
+  }
+
+  .navigasi__submenu::before {
+    display: none;
   }
 
   .kisi-produk {

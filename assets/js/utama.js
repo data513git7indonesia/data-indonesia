@@ -64,7 +64,7 @@
     });
 
     if (sedangProduk) {
-      document.querySelector(".navigasi__tautan--dropdown")?.classList.add("aktif");
+      document.querySelector(".navigasi__tautan--produk")?.classList.add("aktif");
     }
 
     const perbaruiGulir = () => {
@@ -73,44 +73,47 @@
     perbaruiGulir();
     window.addEventListener("scroll", perbaruiGulir, { passive: true });
 
-    /* Dropdown Product */
-    document.querySelectorAll("[data-dropdown]").forEach((dropdown) => {
-      const tombolDropdown = dropdown.querySelector("[data-dropdown-tombol]");
-      const panel = dropdown.querySelector("[data-dropdown-panel]");
-      if (!tombolDropdown || !panel) return;
+    /* Dropdown Product — klik & hover yang andal */
+    const dropdown = document.getElementById("dropdown-produk");
+    const tombolProduk = document.getElementById("tombol-produk");
+    const panelProduk = document.getElementById("menu-produk");
 
-      const setBuka = (buka) => {
-        dropdown.classList.toggle("buka", buka);
-        panel.hidden = !buka;
-        tombolDropdown.setAttribute("aria-expanded", String(buka));
-      };
+    const setDropdown = (buka) => {
+      if (!dropdown || !tombolProduk) return;
+      dropdown.classList.toggle("buka", buka);
+      tombolProduk.setAttribute("aria-expanded", String(buka));
+    };
 
-      tombolDropdown.addEventListener("click", (e) => {
+    if (dropdown && tombolProduk && panelProduk) {
+      tombolProduk.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-        setBuka(panel.hidden);
+        setDropdown(!dropdown.classList.contains("buka"));
       });
 
-      dropdown.addEventListener("mouseenter", () => {
-        if (window.matchMedia("(min-width: 961px)").matches) setBuka(true);
+      /* Di mobile: ketuk label Product juga membuka daftar */
+      const linkProduk = dropdown.querySelector("[data-produk-link]");
+      linkProduk?.addEventListener("click", (e) => {
+        if (window.matchMedia("(max-width: 960px)").matches) {
+          if (!dropdown.classList.contains("buka")) {
+            e.preventDefault();
+            setDropdown(true);
+          }
+        }
       });
-      dropdown.addEventListener("mouseleave", () => {
-        if (window.matchMedia("(min-width: 961px)").matches) setBuka(false);
-      });
-    });
 
-    document.addEventListener("click", (e) => {
-      if (!e.target.closest("[data-dropdown]")) {
-        document.querySelectorAll("[data-dropdown]").forEach((dropdown) => {
-          const panel = dropdown.querySelector("[data-dropdown-panel]");
-          const tombolDropdown = dropdown.querySelector("[data-dropdown-tombol]");
-          if (!panel || !tombolDropdown) return;
-          dropdown.classList.remove("buka");
-          panel.hidden = true;
-          tombolDropdown.setAttribute("aria-expanded", "false");
-        });
-      }
-    });
+      document.addEventListener("click", (e) => {
+        if (!dropdown.contains(e.target)) setDropdown(false);
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") setDropdown(false);
+      });
+
+      panelProduk.querySelectorAll("a").forEach((tautan) => {
+        tautan.addEventListener("click", () => setDropdown(false));
+      });
+    }
 
     if (tombol && menu) {
       tombol.addEventListener("click", () => {
@@ -118,14 +121,23 @@
         tombol.classList.toggle("buka", buka);
         tombol.setAttribute("aria-expanded", String(buka));
         document.body.style.overflow = buka ? "hidden" : "";
+        if (!buka) setDropdown(false);
       });
 
       menu.querySelectorAll("a").forEach((tautan) => {
         tautan.addEventListener("click", () => {
+          /* Di mobile, ketuk "Product" hanya membuka submenu — jangan tutup hamburger */
+          if (
+            tautan.matches("[data-produk-link]") &&
+            window.matchMedia("(max-width: 960px)").matches
+          ) {
+            return;
+          }
           menu.classList.remove("buka");
           tombol.classList.remove("buka");
           tombol.setAttribute("aria-expanded", "false");
           document.body.style.overflow = "";
+          setDropdown(false);
         });
       });
     }

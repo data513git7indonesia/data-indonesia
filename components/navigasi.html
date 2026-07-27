@@ -29,30 +29,33 @@
       <a class="navigasi__tautan" href="index.html">Beranda</a>
       <a class="navigasi__tautan" href="tentang.html">Tentang</a>
 
-      <div class="navigasi__dropdown" data-dropdown>
-        <button
-          class="navigasi__tautan navigasi__tautan--dropdown"
-          type="button"
-          aria-expanded="false"
-          aria-controls="menu-produk"
-          data-dropdown-tombol
-        >
-          Product
-          <svg class="navigasi__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-            <path d="M6 9l6 6 6-6"/>
-          </svg>
-        </button>
-        <div class="navigasi__submenu" id="menu-produk" data-dropdown-panel hidden>
-          <a href="produk.html" class="navigasi__submenu-tautan navigasi__submenu-tautan--semua">Semua Product</a>
-          <a href="produk-crm.html" class="navigasi__submenu-tautan">CRM</a>
-          <a href="produk-accounting.html" class="navigasi__submenu-tautan">Accounting Web &amp; Mobile</a>
-          <a href="produk-saas.html" class="navigasi__submenu-tautan">SaaS</a>
-          <a href="produk-dashboard-industri.html" class="navigasi__submenu-tautan">Dashboard Industri</a>
-          <a href="produk-presensi.html" class="navigasi__submenu-tautan">Presensi Web &amp; Mobile</a>
-          <a href="produk-ebell.html" class="navigasi__submenu-tautan">eBell Button</a>
-          <a href="produk-ebilling.html" class="navigasi__submenu-tautan">eBilling</a>
-          <a href="produk-eoffice.html" class="navigasi__submenu-tautan">eOffice</a>
-          <a href="produk-ai.html" class="navigasi__submenu-tautan">AI</a>
+      <div class="navigasi__dropdown" id="dropdown-produk">
+        <div class="navigasi__dropdown-atas">
+          <a class="navigasi__tautan navigasi__tautan--produk" href="produk.html" data-produk-link>Product</a>
+          <button
+            class="navigasi__dropdown-toggle"
+            type="button"
+            aria-label="Buka daftar product"
+            aria-expanded="false"
+            aria-controls="menu-produk"
+            id="tombol-produk"
+          >
+            <svg class="navigasi__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+        </div>
+        <div class="navigasi__submenu" id="menu-produk" role="menu" aria-label="Daftar product">
+          <a href="produk.html" class="navigasi__submenu-tautan navigasi__submenu-tautan--semua" role="menuitem">Semua Product</a>
+          <a href="produk-crm.html" class="navigasi__submenu-tautan" role="menuitem">CRM</a>
+          <a href="produk-accounting.html" class="navigasi__submenu-tautan" role="menuitem">Accounting Web &amp; Mobile</a>
+          <a href="produk-saas.html" class="navigasi__submenu-tautan" role="menuitem">SaaS</a>
+          <a href="produk-dashboard-industri.html" class="navigasi__submenu-tautan" role="menuitem">Dashboard Industri</a>
+          <a href="produk-presensi.html" class="navigasi__submenu-tautan" role="menuitem">Presensi Web &amp; Mobile</a>
+          <a href="produk-ebell.html" class="navigasi__submenu-tautan" role="menuitem">eBell Button</a>
+          <a href="produk-ebilling.html" class="navigasi__submenu-tautan" role="menuitem">eBilling</a>
+          <a href="produk-eoffice.html" class="navigasi__submenu-tautan" role="menuitem">eOffice</a>
+          <a href="produk-ai.html" class="navigasi__submenu-tautan" role="menuitem">AI</a>
         </div>
       </div>
 

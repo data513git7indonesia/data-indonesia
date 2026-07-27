@@ -39,7 +39,7 @@
     const baris = {
       nama: data.nama,
       email: data.email,
-      telepon: data.telepon || null,
+      telepon: null,
       subjek: data.subjek || "Konsultasi Umum",
       pesan: data.pesan,
       status: "baru",
@@ -89,7 +89,6 @@
       const data = {
         nama: (form.nama?.value || "").trim(),
         email: (form.email?.value || "").trim(),
-        telepon: (form.telepon?.value || "").trim(),
         subjek: (form.subjek?.value || "").trim(),
         pesan: (form.pesan?.value || "").trim(),
       };
