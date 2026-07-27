@@ -386,10 +386,17 @@
       document.body.appendChild(wadah);
     }
 
+    if (!document.getElementById("wadah-sosial")) {
+      const wadahSosial = document.createElement("div");
+      wadahSosial.id = "wadah-sosial";
+      document.body.appendChild(wadahSosial);
+    }
+
     await Promise.all([
       muatKomponen("#wadah-navigasi", "navigasi.html"),
       muatKomponen("#wadah-kaki", "kaki.html"),
       muatKomponen("#wadah-obrolan", "obrolan.html"),
+      muatKomponen("#wadah-sosial", "sosial.html"),
     ]);
 
     inisialisasiNavigasi();
@@ -400,6 +407,10 @@
 
     if (typeof window.inisialisasiObrolan === "function") {
       window.inisialisasiObrolan();
+    }
+
+    if (typeof window.inisialisasiSosial === "function") {
+      window.inisialisasiSosial();
     }
 
     document.dispatchEvent(new CustomEvent("di-siap"));

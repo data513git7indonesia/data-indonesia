@@ -23,8 +23,12 @@ assets/
 basis-data/
   kontak.sql
 components/
-  navigasi.html, kaki.html, pemuat.html, obrolan.html
+  navigasi.html, kaki.html, pemuat.html, obrolan.html, sosial.html
 ```
+
+## Media sosial (sidebar)
+
+Sidebar mengambang kiri di semua halaman. Atur URL di `assets/js/konfigurasi-sosial.js`.
 
 ## Menjalankan lokal
 
