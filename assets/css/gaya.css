@@ -1460,10 +1460,10 @@ select {
 
 /* ---------- Sidebar Media Sosial (Premium) ---------- */
 .sosial-bar {
-  position: fixed;
+  position: absolute;
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 35%;
+  transform: none;
   z-index: 1180;
   display: flex;
   flex-direction: column;
@@ -2124,8 +2124,8 @@ select {
   }
 
   .sosial-bar {
-    top: auto;
-    bottom: 5.75rem;
+    top: 8.5rem;
+    bottom: auto;
     transform: none;
     left: 0.65rem;
   }
